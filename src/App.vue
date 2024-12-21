@@ -1,6 +1,6 @@
 <script setup>
 
-import RuleEngine from "@/RuleEngine.vue";
+import RuleEngine from "@/components/ruleEngine/RuleEngine.vue";
 </script>
 
 <template>

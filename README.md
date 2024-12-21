@@ -5,3 +5,6 @@
 2.规则引擎按钮可以继续增加规则引擎按钮
 3. 可以重复2动作，或者到结束按钮。
 请实现上述代码。
+
+
+https://vueflow.dev/examples/layout/animated.html

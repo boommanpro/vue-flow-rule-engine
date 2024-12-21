@@ -1,33 +1,52 @@
 <!-- src/RuleEngine.vue -->
 <template>
-  <div class="vue-flow">
+  <div class="vue-flow" @drop="onDrop">
+    <sidebar/>
+
     <vue-flow
         v-model:nodes="nodes"
         v-model:edges="edges"
         class="basic-flow"
-        :default-viewport="{ zoom: 1 }"
+        :default-viewport="{ zoom: 1}"
         :min-zoom="0.2"
         :max-zoom="4"
         @node-click="handleNodeClick"
-    >
+        @dragover="onDragOver" @dragleave="onDragLeave">
+
+
+      <mini-map pannable zoomable/>
+
       <custom-controls
           @resetTransform="resetTransform"
           @updatePos="updatePos"
           @logToObject="logToObject"
       />
-      <background variant="lines"/>
-      <mini-map pannable zoomable />
+
+      <dropzone-background
+          :style="{
+          backgroundColor: isDragOver ? '#e7f3ff' : 'transparent',
+          transition: 'background-color 0.2s ease',
+        }"
+      />
+
+      <p v-if="isDragOver">Drop here</p>
+
     </vue-flow>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import { Background } from "@vue-flow/background";
-import { MiniMap } from "@vue-flow/minimap";
-import { useVueFlow, VueFlow } from "@vue-flow/core";
+import {onMounted, ref} from 'vue';
+import {MiniMap} from "@vue-flow/minimap";
+import {useVueFlow, VueFlow} from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
-import CustomControls from "@/components/CustomControls.vue";
+import CustomControls from "@/components/ruleEngine/CustomControls.vue";
+import Sidebar from "@/components/ruleEngine/Sidebar.vue";
+
+import useDragAndDrop from './useDnD.js'
+import DropzoneBackground from "@/components/ruleEngine/DropzoneBackground.vue";
+
+const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
 
 // 初始化节点和边
 const nodes = ref([]);
@@ -46,8 +65,8 @@ const addNode = (type, parentId) => {
   const newNode = {
     id: `node-${nodes.value.length + 1}`,
     type: type,
-    position: { x: 0, y: 0 },
-    data: { label: type === 'input' ? '初始化' : type === 'rule' ? '规则引擎' : '结束' },
+    position: {x: 0, y: 0},
+    data: {label: type === 'input' ? '初始化' : type === 'rule' ? '规则引擎' : '结束'},
   };
   if (type === 'rule') {
     // 计算新规则引擎按钮的位置
@@ -62,10 +81,10 @@ const addNode = (type, parentId) => {
 
 // 初始化时添加一个初始化节点
 onMounted(() => {
-  addNode('input');
+
 });
 
-const { onInit, onNodeDragStop, onConnect, addEdges, setViewport, toObject } = useVueFlow();
+const {onInit, onNodeDragStop, onConnect, addEdges, setViewport, toObject} = useVueFlow();
 
 /**
  * This is a Vue Flow event-hook which can be listened to from anywhere you call the composable, instead of only on the main component
@@ -87,8 +106,8 @@ onInit((vueFlowInstance) => {
  * 3. the node that initiated the drag
  * 4. any intersections with other nodes
  */
-onNodeDragStop(({ event, nodes, node }) => {
-  console.log('Node Drag Stop', { event, nodes, node });
+onNodeDragStop(({event, nodes, node}) => {
+  console.log('Node Drag Stop', {event, nodes, node});
 });
 
 /**
@@ -129,7 +148,7 @@ function logToObject() {
  * Resets the current viewport transformation (zoom & pan)
  */
 function resetTransform() {
-  setViewport({ x: 0, y: 0, zoom: 1 });
+  setViewport({x: 0, y: 0, zoom: 1});
 }
 </script>
 
@@ -143,9 +162,32 @@ function resetTransform() {
   height: 100%;
 }
 
+.vue-flow__node-input,
+.vue-flow__node-default,
+.vue-flow__node-output {
+  z-index: 1000; /* 根据需要调整 */
+}
+
 /* 调试样式 */
 .vue-flow__controls,
 .vue-flow__minimap {
-  z-index: 1000; /* 确保按钮在最上层 */
+  z-index: 999; /* 确保按钮在最上层 */
 }
+
+
+.vue-flow aside {
+  z-index: 1000; /* 确保按钮在最上层 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  font-weight: 700;
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+  background: #10b981bf;
+  -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, .3);
+  box-shadow: 0 5px 10px #0000004d
+}
+
 </style>
