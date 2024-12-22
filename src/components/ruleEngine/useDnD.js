@@ -1,4 +1,4 @@
-import {useVueFlow} from '@vue-flow/core'
+import {Position, useVueFlow} from '@vue-flow/core'
 import {ref, watch} from 'vue'
 
 let id = 0
@@ -90,7 +90,7 @@ export default function useDragAndDrop() {
             id: nodeId,
             type: draggedType.value,
             position,
-            data: {label: nodeId},
+            data: { label: nodeId, toolbarPosition: Position.Top, toolbarVisible: true },
         }
 
         /**

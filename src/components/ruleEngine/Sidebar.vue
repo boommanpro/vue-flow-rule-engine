@@ -15,6 +15,7 @@ const {onDragStart} = useDragAndDrop()
       </div>
 
       <div class="vue-flow__node-output" :draggable="true" @dragstart="onDragStart($event, 'output')">Output Node</div>
+      <div class="vue-flow__node-output" :draggable="true" @dragstart="onDragStart($event, 'menu')">Menu Node</div>
     </div>
   </aside>
 </template>

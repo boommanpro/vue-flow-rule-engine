@@ -14,6 +14,10 @@
         @dragover="onDragOver" @dragleave="onDragLeave">
 
 
+      <template #node-menu="props">
+        <toolbar-node :id="props.id" :data="props.data" />
+      </template>
+
       <mini-map pannable zoomable/>
 
       <custom-controls
@@ -38,13 +42,14 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import {MiniMap} from "@vue-flow/minimap";
-import {useVueFlow, VueFlow} from "@vue-flow/core";
+import {Position, useVueFlow, VueFlow} from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
 import CustomControls from "@/components/ruleEngine/CustomControls.vue";
 import Sidebar from "@/components/ruleEngine/Sidebar.vue";
 
 import useDragAndDrop from './useDnD.js'
 import DropzoneBackground from "@/components/ruleEngine/DropzoneBackground.vue";
+import ToolbarNode from "@/components/ruleEngine/ToolbarNode.vue";
 
 const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
 
@@ -188,6 +193,43 @@ function resetTransform() {
   background: #10b981bf;
   -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, .3);
   box-shadow: 0 5px 10px #0000004d
+}
+
+.vue-flow__node-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background-color: #2d3748;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.vue-flow__node-toolbar button {
+  background: #4a5568;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.vue-flow__node-toolbar button.selected {
+  background: #2563eb;
+}
+
+.vue-flow__node-toolbar button:hover {
+  background: #2563eb;
+}
+
+.vue-flow__node-menu {
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.vue-flow__node-menu.selected {
+  box-shadow: 0 0 0 2px #2563eb;
 }
 
 </style>
