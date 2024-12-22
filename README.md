@@ -8,3 +8,6 @@
 
 
 https://vueflow.dev/examples/layout/animated.html
+
+learn：
+https://examples.logic-flow.cn/demo/dist/organizer
