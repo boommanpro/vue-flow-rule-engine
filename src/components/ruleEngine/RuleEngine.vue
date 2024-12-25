@@ -45,7 +45,7 @@ import {MiniMap} from "@vue-flow/minimap";
 import {Position, useVueFlow, VueFlow} from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
 import CustomControls from "@/components/ruleEngine/CustomControls.vue";
-import Sidebar from "@/components/ruleEngine/Sidebar.vue";
+import Sidebar from "@/components/ruleEngine/siderbar/Sidebar.vue";
 
 import useDragAndDrop from './useDnD.js'
 import DropzoneBackground from "@/components/ruleEngine/DropzoneBackground.vue";
@@ -190,7 +190,7 @@ function resetTransform() {
   border-right: 1px solid #eee;
   padding: 15px 10px;
   font-size: 12px;
-  background: #10b981bf;
+  background: rgba(255, 255, 255, 0.75);
   -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, .3);
   box-shadow: 0 5px 10px #0000004d
 }
@@ -232,4 +232,12 @@ function resetTransform() {
   box-shadow: 0 0 0 2px #2563eb;
 }
 
+.custom-controls {
+  position: absolute;
+  top: 10px; /* 距离顶部的距离 */
+  right: 10px; /* 距离右侧的距离 */
+  display: flex;
+  gap: 10px; /* 按钮之间的间距 */
+  z-index: 1001; /* 确保按钮在最上层 */
+}
 </style>
