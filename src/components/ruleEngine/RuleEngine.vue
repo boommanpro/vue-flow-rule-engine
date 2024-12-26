@@ -42,6 +42,9 @@
       <p v-if="isDragOver">Drop here</p>
 
     </vue-flow>
+
+    <node-edit-modal v-if="selectedNode" :node="selectedNode" :visible="isModalVisible" @update:visible="isModalVisible = $event" @updateNode="updateNode"/>
+
   </div>
 </template>
 
@@ -57,6 +60,7 @@ import useDragAndDrop from './useDnD.js'
 import DropzoneBackground from "@/components/ruleEngine/DropzoneBackground.vue";
 import ToolbarNode from "@/components/ruleEngine/ToolbarNode.vue";
 import ProcessNode from "@/components/ruleEngine/siderbar/nodes/ProcessNode.vue";
+import NodeEditModal from "@/components/ruleEngine/siderbar/drawer/NodeEditModal.vue";
 
 const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
 
@@ -70,6 +74,9 @@ const handleNodeClick = (node) => {
     // 在规则引擎按钮上添加新的规则引擎按钮
     addNode('rule', node.id);
   }
+  selectedNode.value = node.node;
+  console.log(selectedNode)
+  isModalVisible.value = true;
 };
 
 // 添加节点
@@ -162,6 +169,20 @@ function logToObject() {
 function resetTransform() {
   setViewport({x: 0, y: 0, zoom: 1});
 }
+
+
+
+const selectedNode = ref(null);
+const isModalVisible = ref(false);
+
+
+const updateNode = (updatedNode) => {
+  console.log(updatedNode)
+  const index = nodes.value.findIndex(n => n.id === updatedNode.id);
+  if (index !== -1) {
+    nodes.value[index] = updatedNode;
+  }
+};
 </script>
 
 <style>
@@ -177,18 +198,18 @@ function resetTransform() {
 .vue-flow__node-input,
 .vue-flow__node-default,
 .vue-flow__node-output {
-  z-index: 1000; /* 根据需要调整 */
+  z-index: 100; /* 根据需要调整 */
 }
 
 /* 调试样式 */
 .vue-flow__controls,
 .vue-flow__minimap {
-  z-index: 999; /* 确保按钮在最上层 */
+  z-index: 100; /* 确保按钮在最上层 */
 }
 
 
 .vue-flow aside {
-  z-index: 1000; /* 确保按钮在最上层 */
+  z-index: 100; /* 确保按钮在最上层 */
   position: absolute;
   top: 0;
   left: 0;
@@ -245,6 +266,6 @@ function resetTransform() {
   right: 10px; /* 距离右侧的距离 */
   display: flex;
   gap: 10px; /* 按钮之间的间距 */
-  z-index: 1001; /* 确保按钮在最上层 */
+  z-index: 100; /* 确保按钮在最上层 */
 }
 </style>
