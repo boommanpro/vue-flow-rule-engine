@@ -11,3 +11,7 @@ https://vueflow.dev/examples/layout/animated.html
 
 learn：
 https://examples.logic-flow.cn/demo/dist/organizer
+
+
+rule-go
+http://8.134.32.225:9090/ui/#/workflow/design?id=rule01&to=info&size=20&page=1
