@@ -79,6 +79,7 @@ export default function useDragAndDrop() {
      * @param {DragEvent} event
      */
     function onDrop(event) {
+        console.log(event)
         const position = screenToFlowCoordinate({
             x: event.clientX,
             y: event.clientY,
@@ -90,7 +91,10 @@ export default function useDragAndDrop() {
             id: nodeId,
             type: draggedType.value,
             position,
-            data: { label: nodeId, toolbarPosition: Position.Top, toolbarVisible: true },
+            data: {
+                label: nodeId, toolbarPosition: Position.Top, toolbarVisible: true,
+                hasError:true,
+            },
         }
 
         /**

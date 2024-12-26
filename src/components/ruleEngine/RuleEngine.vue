@@ -15,7 +15,13 @@
 
 
       <template #node-menu="props">
-        <toolbar-node :id="props.id" :data="props.data" />
+        <toolbar-node :id="props.id" :data="props.data"/>
+      </template>
+
+
+      <template #node-process-node="props">
+        <process-node :data="props.data" :source-position="props.sourcePosition"
+                      :target-position="props.targetPosition"/>
       </template>
 
       <mini-map pannable zoomable/>
@@ -42,7 +48,7 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import {MiniMap} from "@vue-flow/minimap";
-import {Position, useVueFlow, VueFlow} from "@vue-flow/core";
+import {useVueFlow, VueFlow} from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
 import CustomControls from "@/components/ruleEngine/CustomControls.vue";
 import Sidebar from "@/components/ruleEngine/siderbar/Sidebar.vue";
@@ -50,6 +56,7 @@ import Sidebar from "@/components/ruleEngine/siderbar/Sidebar.vue";
 import useDragAndDrop from './useDnD.js'
 import DropzoneBackground from "@/components/ruleEngine/DropzoneBackground.vue";
 import ToolbarNode from "@/components/ruleEngine/ToolbarNode.vue";
+import ProcessNode from "@/components/ruleEngine/siderbar/nodes/ProcessNode.vue";
 
 const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
 

@@ -19,6 +19,7 @@ defineProps<{
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'mapping')">数据转换</div>
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'switch')">Switch组件</div>
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'boolean')">Boolean组件</div>
+      <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'process-node')">nodeType</div>
       </div>
   </el-collapse-item>
 </template>
