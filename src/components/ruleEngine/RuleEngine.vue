@@ -24,7 +24,7 @@
                       :target-position="props.targetPosition"/>
       </template>
 
-      <mini-map pannable zoomable/>
+
 
       <custom-controls
           @resetTransform="resetTransform"
@@ -53,12 +53,12 @@ import {onMounted, ref} from 'vue';
 import {MiniMap} from "@vue-flow/minimap";
 import {useVueFlow, VueFlow} from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
-import CustomControls from "@/components/ruleEngine/CustomControls.vue";
+import CustomControls from "@/components/ruleEngine/control/CustomControls.vue";
 import Sidebar from "@/components/ruleEngine/siderbar/Sidebar.vue";
 
 import useDragAndDrop from './useDnD.js'
-import DropzoneBackground from "@/components/ruleEngine/DropzoneBackground.vue";
-import ToolbarNode from "@/components/ruleEngine/ToolbarNode.vue";
+import DropzoneBackground from "@/components/ruleEngine/background/DropzoneBackground.vue";
+import ToolbarNode from "@/components/ruleEngine/toolbar/ToolbarNode.vue";
 import ProcessNode from "@/components/ruleEngine/siderbar/nodes/ProcessNode.vue";
 import NodeEditModal from "@/components/ruleEngine/siderbar/drawer/NodeEditModal.vue";
 
