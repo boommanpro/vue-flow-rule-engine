@@ -22,22 +22,42 @@ import {ControlButton, Controls} from "@vue-flow/controls";
 import CustomIcon from "@/components/ruleEngine/base/CustomIcon.vue";
 import {MiniMap} from "@vue-flow/minimap";
 import {ref} from "vue";
+import {useVueFlow} from "@vue-flow/core";
 
+const nodes=defineModel('nodes')
 const emit = defineEmits(['resetTransform', 'updatePos', 'logToObject']);
 
 const miniMapShow = ref(true);
 
-const resetTransform = () => {
-  emit('resetTransform');
-};
 
-const updatePos = () => {
-  emit('updatePos');
-};
+const { setViewport, toObject} = useVueFlow();
 
-const logToObject = () => {
-  emit('logToObject');
-};
+function updatePos() {
+  nodes.value = nodes.value.map((node) => {
+    return {
+      ...node,
+      position: {
+        x: Math.random() * 400,
+        y: Math.random() * 400,
+      },
+    };
+  });
+}
+
+/**
+ * toObject transforms your current graph data to an easily persist-able object
+ */
+function logToObject() {
+  console.log(toObject());
+}
+
+/**
+ * Resets the current viewport transformation (zoom & pan)
+ */
+function resetTransform() {
+  setViewport({x: 0, y: 0, zoom: 1});
+}
+
 const toggleMiniMap = () => {
   miniMapShow.value = !miniMapShow.value;
 };

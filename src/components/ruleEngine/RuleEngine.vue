@@ -1,7 +1,6 @@
 <!-- src/RuleEngine.vue -->
 <template>
   <div class="vue-flow" @drop="onDrop">
-    <sidebar/>
 
     <vue-flow
         v-model:nodes="nodes"
@@ -12,7 +11,6 @@
         :max-zoom="4"
         @node-click="handleNodeClick"
         @dragover="onDragOver" @dragleave="onDragLeave">
-
 
       <template #node-menu="props">
         <toolbar-node :id="props.id" :data="props.data"/>
@@ -25,48 +23,37 @@
       </template>
 
 
+      <custom-controls v-model:nodes="nodes"/>
 
-      <custom-controls
-          @resetTransform="resetTransform"
-          @updatePos="updatePos"
-          @logToObject="logToObject"
-      />
+      <dropzone-background/>
 
-      <dropzone-background
-          :style="{
-          backgroundColor: isDragOver ? '#e7f3ff' : 'transparent',
-          transition: 'background-color 0.2s ease',
-        }"
-      />
-
-      <p v-if="isDragOver">Drop here</p>
 
     </vue-flow>
 
-    <node-edit-modal v-if="selectedNode" :node="selectedNode" :visible="isModalVisible" @update:visible="isModalVisible = $event" @updateNode="updateNode"/>
+    <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal"/>
 
   </div>
 </template>
 
 <script setup>
 import {onMounted, ref} from 'vue';
-import {MiniMap} from "@vue-flow/minimap";
 import {useVueFlow, VueFlow} from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
 import CustomControls from "@/components/ruleEngine/control/CustomControls.vue";
 import Sidebar from "@/components/ruleEngine/siderbar/Sidebar.vue";
 
 import useDragAndDrop from './useDnD.js'
+import setupRuleEngine from './event/ruleEngine.js'
 import DropzoneBackground from "@/components/ruleEngine/background/DropzoneBackground.vue";
 import ToolbarNode from "@/components/ruleEngine/toolbar/ToolbarNode.vue";
 import ProcessNode from "@/components/ruleEngine/siderbar/nodes/ProcessNode.vue";
-import NodeEditModal from "@/components/ruleEngine/siderbar/drawer/NodeEditModal.vue";
 
 const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
-
+setupRuleEngine();
 // 初始化节点和边
 const nodes = ref([]);
 const edges = ref([]);
+const showModal = ref(false)
 
 // 处理节点点击事件
 const handleNodeClick = (node) => {
@@ -75,8 +62,8 @@ const handleNodeClick = (node) => {
     addNode('rule', node.id);
   }
   selectedNode.value = node.node;
+  showModal.value = true;
   console.log(selectedNode)
-  isModalVisible.value = true;
 };
 
 // 添加节点
@@ -103,86 +90,11 @@ onMounted(() => {
 
 });
 
-const {onInit, onNodeDragStop, onConnect, addEdges, setViewport, toObject} = useVueFlow();
 
-/**
- * This is a Vue Flow event-hook which can be listened to from anywhere you call the composable, instead of only on the main component
- * Any event that is available as `@event-name` on the VueFlow component is also available as `onEventName` on the composable and vice versa
- *
- * onInit is called when the VueFlow viewport is initialized
- */
-onInit((vueFlowInstance) => {
-  // instance is the same as the return of `useVueFlow`
-  vueFlowInstance.fitView();
-});
-
-/**
- * onNodeDragStop is called when a node is done being dragged
- *
- * Node drag events provide you with:
- * 1. the event object
- * 2. the nodes array (if multiple nodes are dragged)
- * 3. the node that initiated the drag
- * 4. any intersections with other nodes
- */
-onNodeDragStop(({event, nodes, node}) => {
-  console.log('Node Drag Stop', {event, nodes, node});
-});
-
-/**
- * onConnect is called when a new connection is created.
- *
- * You can add additional properties to your new edge (like a type or label) or block the creation altogether by not calling `addEdges`
- */
-onConnect((connection) => {
-  addEdges(connection);
-});
-
-/**
- * To update a node or multiple nodes, you can
- * 1. Mutate the node objects *if* you're using `v-model`
- * 2. Use the `updateNode` method (from `useVueFlow`) to update the node(s)
- * 3. Create a new array of nodes and pass it to the `nodes` ref
- */
-function updatePos() {
-  nodes.value = nodes.value.map((node) => {
-    return {
-      ...node,
-      position: {
-        x: Math.random() * 400,
-        y: Math.random() * 400,
-      },
-    };
-  });
-}
-
-/**
- * toObject transforms your current graph data to an easily persist-able object
- */
-function logToObject() {
-  console.log(toObject());
-}
-
-/**
- * Resets the current viewport transformation (zoom & pan)
- */
-function resetTransform() {
-  setViewport({x: 0, y: 0, zoom: 1});
-}
 
 
 
 const selectedNode = ref(null);
-const isModalVisible = ref(false);
-
-
-const updateNode = (updatedNode) => {
-  console.log(updatedNode)
-  const index = nodes.value.findIndex(n => n.id === updatedNode.id);
-  if (index !== -1) {
-    nodes.value[index] = updatedNode;
-  }
-};
 </script>
 
 <style>

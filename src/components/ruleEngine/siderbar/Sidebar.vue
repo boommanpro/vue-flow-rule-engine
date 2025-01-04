@@ -3,10 +3,15 @@ import useDragAndDrop from '../useDnD.js'
 import {ref} from 'vue'
 import BaseNode from "@/components/ruleEngine/siderbar/nodes/BaseNode.vue";
 import {Search} from "@element-plus/icons-vue";
+import NodeEditModal from "@/components/ruleEngine/siderbar/drawer/NodeEditModal.vue";
 
 const {onDragStart} = useDragAndDrop()
 
 const searchQuery = ref('')
+
+const selectedNode = defineModel('node')
+const modalVisible = defineModel('modalVisible')
+
 
 </script>
 
@@ -17,6 +22,7 @@ const searchQuery = ref('')
       <base-node :filter="searchQuery"/>
     </el-collapse>
   </aside>
+  <node-edit-modal v-if="selectedNode" v-model:node="selectedNode" v-model:visible="modalVisible"/>
 </template>
 
 <style scoped>

@@ -3,10 +3,8 @@ import useDragAndDrop from '@/components/ruleEngine/useDnD.js'
 
 const {onDragStart} = useDragAndDrop()
 
-import { ref } from 'vue'
-
 defineProps<{
-  filter:string
+  filter: string
 }>()
 </script>
 
@@ -16,11 +14,16 @@ defineProps<{
     <div class="nodes">
       <!-- Input nodes -->
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'input')">输入</div>
+
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'mapping')">数据转换</div>
+
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'switch')">Switch组件</div>
+
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'boolean')">Boolean组件</div>
+
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'process-node')">nodeType</div>
-      </div>
+
+    </div>
   </el-collapse-item>
 </template>
 
