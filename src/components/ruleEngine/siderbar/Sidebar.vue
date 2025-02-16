@@ -15,12 +15,12 @@ const searchQuery = ref('')
 const selectedNode = defineModel('node')
 const modalVisible = defineModel('modalVisible')
 
-
+const activeNames = ref(['inputNodes'])
 </script>
 
 <template>
   <aside>
-    <el-collapse>
+    <el-collapse v-model="activeNames">
       <el-input :prefix-icon="Search" v-model="searchQuery" placeholder="搜索组件" type="text" class="search-input"/>
       <input-nodes :filter="searchQuery"/>
       <filter-nodes :filter="searchQuery"/>
