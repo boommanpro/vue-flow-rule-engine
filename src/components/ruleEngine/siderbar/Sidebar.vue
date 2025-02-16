@@ -3,10 +3,7 @@ import useDragAndDrop from '../event/useDnD.js'
 import {ref} from 'vue'
 import {Search} from "@element-plus/icons-vue";
 import NodeEditModal from "@/components/ruleEngine/siderbar/drawer/NodeEditModal.vue";
-import FilterNodes from "@/components/ruleEngine/siderbar/FilterNodes.vue";
-import InputNodes from "@/components/ruleEngine/siderbar/InputNodes.vue";
-import MappingNodes from "@/components/ruleEngine/siderbar/MappingNodes.vue";
-import ProcessNodes from "@/components/ruleEngine/siderbar/ProcessNodes.vue";
+import SideBarNodes from "@/components/ruleEngine/siderbar/SideBarNodes.vue";
 
 const {onDragStart} = useDragAndDrop()
 
@@ -22,10 +19,7 @@ const activeNames = ref(['inputNodes'])
   <aside>
     <el-collapse v-model="activeNames">
       <el-input :prefix-icon="Search" v-model="searchQuery" placeholder="搜索组件" type="text" class="search-input"/>
-      <input-nodes :filter="searchQuery"/>
-      <filter-nodes :filter="searchQuery"/>
-      <mapping-nodes :filter="searchQuery"/>
-      <process-nodes :filter="searchQuery"/>
+      <side-bar-nodes :filter="searchQuery"/>
     </el-collapse>
   </aside>
   <node-edit-modal v-if="selectedNode" v-model:node="selectedNode" v-model:visible="modalVisible"/>

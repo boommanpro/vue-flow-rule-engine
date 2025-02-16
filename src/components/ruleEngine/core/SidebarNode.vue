@@ -12,7 +12,7 @@ defineProps<{
 </script>
 <template>
   <div class="side-bar-node tf-btn" :draggable="true" @dragstart="onDragStart($event, type)">
-    <el-icon :size="24" style="margin-left: 10px;margin-right: 20px">
+    <el-icon :size="24" style="margin-left: 10px;margin-right: 20px;color: blue">
       <component :is="icon"/>
     </el-icon>
     <span>{{ name }}</span>
