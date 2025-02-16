@@ -12,10 +12,6 @@
         :node-types="nodeTypes"
         @dragover="onDragOver" @dragleave="onDragLeave">
 
-      <template #node-menu="props">
-        <toolbar-node :id="props.id" :data="props.data"/>
-      </template>
-
       <custom-controls v-model:nodes="nodes"/>
       <dropzone-background/>
     </vue-flow>
@@ -27,16 +23,15 @@
 
 <script setup>
 import {onMounted, ref} from 'vue';
-import {useVueFlow, VueFlow} from "@vue-flow/core";
+import {VueFlow} from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
+import '@/components/ruleEngine/global-vue-flow.css';
 import CustomControls from "@/components/ruleEngine/control/CustomControls.vue";
 import Sidebar from "@/components/ruleEngine/siderbar/Sidebar.vue";
 
 import useDragAndDrop from './event/useDnD.js'
 import setupRuleEngine from './event/ruleEngine.js'
 import DropzoneBackground from "@/components/ruleEngine/background/DropzoneBackground.vue";
-import ToolbarNode from "@/components/ruleEngine/toolbar/ToolbarNode.vue";
-import ProcessNode from "@/components/ruleEngine/nodes/process/ProcessNode.vue";
 import autoRegisterNode from "@/components/ruleEngine/nodes/autoRegisterNode.js";
 
 const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
@@ -99,32 +94,9 @@ const selectedNode = ref(null);
   box-shadow: 0 5px 10px #0000004d
 }
 
-.vue-flow__node-toolbar {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  background-color: #2d3748;
-  padding: 8px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
 
-.vue-flow__node-toolbar button {
-  background: #4a5568;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
 
-.vue-flow__node-toolbar button.selected {
-  background: #2563eb;
-}
 
-.vue-flow__node-toolbar button:hover {
-  background: #2563eb;
-}
 
 .vue-flow__node-menu {
   padding: 16px 24px;

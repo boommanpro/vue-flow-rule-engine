@@ -14,7 +14,8 @@ defineProps<{
     <div class="nodes">
 
 
-      <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'ProcessNode')">nodeType</div>
+      <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'ProcessNode')">ProcessNode</div>
+      <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'ToolbarNode')">ToolbarNode</div>
 
     </div>
   </el-collapse-item>
