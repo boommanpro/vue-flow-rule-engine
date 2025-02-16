@@ -9,25 +9,15 @@
         :default-viewport="{ zoom: 1}"
         :min-zoom="0.2"
         :max-zoom="4"
-        @node-click="handleNodeClick"
+        :node-types="nodeTypes"
         @dragover="onDragOver" @dragleave="onDragLeave">
 
       <template #node-menu="props">
         <toolbar-node :id="props.id" :data="props.data"/>
       </template>
 
-
-      <template #node-process-node="props">
-        <process-node :data="props.data" :source-position="props.sourcePosition"
-                      :target-position="props.targetPosition"/>
-      </template>
-
-
       <custom-controls v-model:nodes="nodes"/>
-
       <dropzone-background/>
-
-
     </vue-flow>
 
     <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal"/>
@@ -42,11 +32,12 @@ import '@vue-flow/controls/dist/style.css';
 import CustomControls from "@/components/ruleEngine/control/CustomControls.vue";
 import Sidebar from "@/components/ruleEngine/siderbar/Sidebar.vue";
 
-import useDragAndDrop from './useDnD.js'
+import useDragAndDrop from './event/useDnD.js'
 import setupRuleEngine from './event/ruleEngine.js'
 import DropzoneBackground from "@/components/ruleEngine/background/DropzoneBackground.vue";
 import ToolbarNode from "@/components/ruleEngine/toolbar/ToolbarNode.vue";
-import ProcessNode from "@/components/ruleEngine/siderbar/nodes/ProcessNode.vue";
+import ProcessNode from "@/components/ruleEngine/nodes/process/ProcessNode.vue";
+import autoRegisterNode from "@/components/ruleEngine/nodes/autoRegisterNode.js";
 
 const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
 setupRuleEngine();
@@ -54,42 +45,15 @@ setupRuleEngine();
 const nodes = ref([]);
 const edges = ref([]);
 const showModal = ref(false)
+// 自动注册节点类型
+let nodeTypes = {};
 
 // 处理节点点击事件
-const handleNodeClick = (node) => {
-  if (node.type === 'rule') {
-    // 在规则引擎按钮上添加新的规则引擎按钮
-    addNode('rule', node.id);
-  }
-  selectedNode.value = node.node;
-  showModal.value = true;
-  console.log(selectedNode)
-};
-
-// 添加节点
-const addNode = (type, parentId) => {
-  const newNode = {
-    id: `node-${nodes.value.length + 1}`,
-    type: type,
-    position: {x: 0, y: 0},
-    data: {label: type === 'input' ? '初始化' : type === 'rule' ? '规则引擎' : '结束'},
-  };
-  if (type === 'rule') {
-    // 计算新规则引擎按钮的位置
-    const lastNode = nodes.value.find((n) => n.id === parentId);
-    newNode.position = {
-      x: lastNode.position.x + 200,
-      y: lastNode.position.y,
-    };
-  }
-  nodes.value.push(newNode);
-};
 
 // 初始化时添加一个初始化节点
-onMounted(() => {
-
+onMounted(async () => {
+  nodeTypes = await autoRegisterNode();
 });
-
 
 
 

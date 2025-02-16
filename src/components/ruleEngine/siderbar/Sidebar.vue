@@ -1,9 +1,12 @@
 <script lang="ts" setup>
-import useDragAndDrop from '../useDnD.js'
+import useDragAndDrop from '../event/useDnD.js'
 import {ref} from 'vue'
-import BaseNode from "@/components/ruleEngine/siderbar/nodes/BaseNode.vue";
 import {Search} from "@element-plus/icons-vue";
 import NodeEditModal from "@/components/ruleEngine/siderbar/drawer/NodeEditModal.vue";
+import FilterNodes from "@/components/ruleEngine/siderbar/FilterNodes.vue";
+import InputNodes from "@/components/ruleEngine/siderbar/InputNodes.vue";
+import MappingNodes from "@/components/ruleEngine/siderbar/MappingNodes.vue";
+import ProcessNodes from "@/components/ruleEngine/siderbar/ProcessNodes.vue";
 
 const {onDragStart} = useDragAndDrop()
 
@@ -19,7 +22,10 @@ const modalVisible = defineModel('modalVisible')
   <aside>
     <el-collapse>
       <el-input :prefix-icon="Search" v-model="searchQuery" placeholder="搜索组件" type="text" class="search-input"/>
-      <base-node :filter="searchQuery"/>
+      <input-nodes :filter="searchQuery"/>
+      <filter-nodes :filter="searchQuery"/>
+      <mapping-nodes :filter="searchQuery"/>
+      <process-nodes :filter="searchQuery"/>
     </el-collapse>
   </aside>
   <node-edit-modal v-if="selectedNode" v-model:node="selectedNode" v-model:visible="modalVisible"/>
