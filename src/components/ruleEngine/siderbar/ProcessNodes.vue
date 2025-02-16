@@ -12,11 +12,7 @@ defineProps<{
 
   <el-collapse-item title="执行组件" name="processNodes">
     <div class="nodes">
-
-
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'ProcessNode')">ProcessNode</div>
-      <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'ToolbarNode')">ToolbarNode</div>
-
     </div>
   </el-collapse-item>
 </template>

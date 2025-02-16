@@ -12,6 +12,7 @@ defineProps<{
 
   <el-collapse-item title="输入组件" name="inputNodes">
     <div class="nodes">
+      <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'Demo')">demo</div>
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'StartNode')">开始节点</div>
       <div class="vue-flow__node-input" :draggable="true" @dragstart="onDragStart($event, 'input')">输入</div>
     </div>

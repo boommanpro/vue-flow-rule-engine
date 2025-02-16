@@ -19,7 +19,7 @@
 
 <script setup>
 import {ControlButton, Controls} from "@vue-flow/controls";
-import CustomIcon from "@/components/ruleEngine/base/CustomIcon.vue";
+import CustomIcon from "@/components/ruleEngine/icons/CustomIcon.vue";
 import {MiniMap} from "@vue-flow/minimap";
 import {ref} from "vue";
 import {useVueFlow} from "@vue-flow/core";
