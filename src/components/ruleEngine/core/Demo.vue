@@ -1,15 +1,8 @@
 <script setup>
-import {computed, toRef} from 'vue'
-import {Handle, Position, useHandleConnections} from '@vue-flow/core'
-import {NodeToolbar} from "@vue-flow/node-toolbar";
-import RunIcon from "@/components/ruleEngine/icons/RunIcon.vue";
-import CopyIcon from "@/components/ruleEngine/icons/CopyIcon.vue";
-import DeleteIcon from "@/components/ruleEngine/icons/DeleteIcon.vue";
-import DefinedParameterItem from "@/components/ruleEngine/core/base/DefinedParameterItem.vue";
 import AiNodeToolBar from "@/components/ruleEngine/core/AiNodeToolBar.vue";
 
 const props = defineProps({
-  id:{
+  id: {
     type: String,
     required: true,
   },
@@ -23,21 +16,12 @@ const props = defineProps({
   targetPosition: {
     type: String,
   },
+// 添加一个选中状态的 prop
+  selected: {
+    type: Boolean,
+    default: false
+  }
 })
-
-const sourceConnections = useHandleConnections({
-  type: 'target',
-})
-
-const targetConnections = useHandleConnections({
-  type: 'source',
-})
-
-const deleteNode = (id) => {
-  // 删除节点
-  // ...
-  console.log(id)
-}
 
 const node = {
   id: '执行节点',
@@ -50,14 +34,14 @@ let paramIndexCounter = 0;
 const addParam = () => {
   node.params.push({name: '', type: 'String', index: paramIndexCounter.toString()});
   paramIndexCounter++;
-
 }
-
 </script>
 
 <template>
   <div class="ai-flow__nodes">
-    <div class=".ai-flow__node">
+    <!-- 根据 selected prop 添加 selectable 和 selected 类 -->
+    <div class="ai-flow__node selectable"
+         :class="{ selected: selected }">
       <ai-node-tool-bar :id="id"/>
       <div class="tf-node-wrapper">
         <div class="tf-node-wrapper-title">
@@ -65,13 +49,11 @@ const addParam = () => {
         </div>
         <div class="tf-node-wrapper-body">
           <h3>{{ node.id }}</h3>
-          <defined-parameter-item/>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 
 <style lang="scss" scoped>
 .tf-node-wrapper {
@@ -99,9 +81,11 @@ const addParam = () => {
 
 .ai-flow__nodes {
   .ai-flow__node {
-    border: 3px solid transparent;
     border-radius: 5px;
     box-sizing: border-box;
+    /* 初始状态设置透明边框 */
+
+    border: 1px solid transparent;
 
     .ai-flow__handle {
       width: 16px;
@@ -133,19 +117,22 @@ const addParam = () => {
       content: ' ';
       position: absolute;
       border-radius: 5px;
-      top: -2px;
-      left: -2px;
+      top: -1px;
+      left: -1px;
       border: 1px solid #ccc;
-      height: calc(100% + 2px);
-      width: calc(100% + 2px);
+      height: calc(100% + 1px);
+      width: calc(100% + 1px);
     }
 
     &:hover {
-      border: 3px solid #bacaef7d;
+      /* 悬停时改变边框颜色 */
+      border-color: rgba(34, 49, 80, 0.49);
     }
 
     &.selectable.selected {
-      border: 3px solid #bacaef7d;
+      /* 选中时改变边框颜色 */
+      border-radius: 5px;
+      border-color: rgba(0, 77, 255, 0.49);
       box-shadow: var(--xy-node-boxshadow-selected);
     }
 

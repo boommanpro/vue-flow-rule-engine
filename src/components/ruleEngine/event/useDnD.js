@@ -92,7 +92,7 @@ export default function useDragAndDrop() {
             type: draggedType.value,
             position,
             data: {
-                label: draggedType.value, toolbarPosition: Position.Top, toolbarVisible: true,
+                label: draggedType.value, toolbarPosition: Position.Top,
                 hasError:true,
             },
         }

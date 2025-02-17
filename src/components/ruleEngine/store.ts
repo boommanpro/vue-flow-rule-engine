@@ -8,7 +8,7 @@ const useStore = defineStore('vue-flow-pinia', () => {
             id: '1',
             type: 'Demo',
             label: 'Demo',
-            position: { x: 250, y: 5 },
+            position: { x: 250, y: 100 },
         },
     ]);
 
