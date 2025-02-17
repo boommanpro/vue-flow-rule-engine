@@ -1,7 +1,8 @@
 // src/components/ruleEngine/siderbar/autoRegisterNode.js
 
-import { markRaw } from 'vue';
+import {markRaw} from 'vue';
 import Demo from "@/components/ruleEngine/core/Demo.vue";
+
 export default async function autoRegisterNode() {
     const nodeTypes = {};
 
@@ -19,7 +20,7 @@ export default async function autoRegisterNode() {
         nodeTypes[componentName] = markRaw(component.default);
     }
     //demo 测试
-    nodeTypes['Demo']=markRaw(Demo);
+    nodeTypes['Demo'] = markRaw(Demo);
     console.log(nodeTypes);
     //demo 测试
     return nodeTypes;

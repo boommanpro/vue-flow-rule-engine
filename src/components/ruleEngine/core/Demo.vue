@@ -9,6 +9,10 @@ import DefinedParameterItem from "@/components/ruleEngine/core/base/DefinedParam
 import AiNodeToolBar from "@/components/ruleEngine/core/AiNodeToolBar.vue";
 
 const props = defineProps({
+  id:{
+    type: String,
+    required: true,
+  },
   data: {
     type: Object,
     required: true,
@@ -54,7 +58,7 @@ const addParam = () => {
 <template>
   <div class="ai-flow__nodes">
     <div class=".ai-flow__node">
-      <ai-node-tool-bar/>
+      <ai-node-tool-bar :id="id"/>
       <div class="tf-node-wrapper">
         <div class="tf-node-wrapper-title">
           vue-flow-rule-engine

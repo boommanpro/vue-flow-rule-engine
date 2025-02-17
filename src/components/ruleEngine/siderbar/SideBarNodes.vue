@@ -27,7 +27,7 @@ defineProps<{
             :icon="icons[node.icon]"
             :name="node.name"
             :type="node.type"
-            @dragstart="onDragStart"
+            @dragstart="onDragStart($event,node.type)"
         />
       </div>
     </el-collapse-item>

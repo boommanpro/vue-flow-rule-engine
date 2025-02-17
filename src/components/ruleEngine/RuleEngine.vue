@@ -3,16 +3,16 @@
   <div class="vue-flow" @drop="onDrop">
 
     <vue-flow
-        v-model:nodes="nodes"
-        v-model:edges="edges"
+        v-model:nodes="store.nodes"
+        v-model:edges="store.edges"
         class="basic-flow"
         :default-viewport="{ zoom: 1}"
         :min-zoom="0.2"
         :max-zoom="4"
-        :node-types="nodeTypes"
+        :node-types="store.nodeTypes"
         @dragover="onDragOver" @dragleave="onDragLeave">
 
-      <custom-controls v-model:nodes="nodes"/>
+      <custom-controls v-model:nodes="store.nodes"/>
       <dropzone-background/>
     </vue-flow>
 
@@ -22,6 +22,7 @@
 </template>
 
 <script setup>
+import useStore from './store';
 import {onMounted, ref} from 'vue';
 import {VueFlow} from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
@@ -32,22 +33,19 @@ import Sidebar from "@/components/ruleEngine/siderbar/Sidebar.vue";
 import useDragAndDrop from './event/useDnD.js'
 import setupRuleEngine from './event/ruleEngine.js'
 import DropzoneBackground from "@/components/ruleEngine/background/DropzoneBackground.vue";
-import autoRegisterNode from "@/components/ruleEngine/nodes/autoRegisterNode.js";
+
 
 const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
 setupRuleEngine();
+const store = useStore();
 // 初始化节点和边
-const nodes = ref([]);
-const edges = ref([]);
 const showModal = ref(false)
-// 自动注册节点类型
-let nodeTypes = {};
 
 // 处理节点点击事件
 
 // 初始化时添加一个初始化节点
 onMounted(async () => {
-  nodeTypes = await autoRegisterNode();
+
 });
 
 
@@ -66,17 +64,7 @@ const selectedNode = ref(null);
   height: 100%;
 }
 
-.vue-flow__node-input,
-.vue-flow__node-default,
-.vue-flow__node-output {
-  z-index: 100; /* 根据需要调整 */
-}
 
-/* 调试样式 */
-.vue-flow__controls,
-.vue-flow__minimap {
-  z-index: 100; /* 确保按钮在最上层 */
-}
 
 
 .vue-flow aside {
@@ -98,15 +86,7 @@ const selectedNode = ref(null);
 
 
 
-.vue-flow__node-menu {
-  padding: 16px 24px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
 
-.vue-flow__node-menu.selected {
-  box-shadow: 0 0 0 2px #2563eb;
-}
 
 .custom-controls {
   position: absolute;

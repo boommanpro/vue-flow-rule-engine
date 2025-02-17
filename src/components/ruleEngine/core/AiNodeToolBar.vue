@@ -1,10 +1,10 @@
 <template>
-  <NodeToolbar :is-visible="true" :position="Position.Top">
+  <NodeToolbar :is-visible="true" :position="Position.Top" align="end">
     <div class="tf-node-toolbar">
-      <el-button link>
+      <el-button link @click="runNode">
         <RunIcon/>
       </el-button>
-      <el-button link>
+      <el-button link @click="copyNode">
         <CopyIcon/>
       </el-button>
       <el-button link @click="deleteNode">
@@ -19,8 +19,35 @@ import DeleteIcon from "@/components/ruleEngine/icons/DeleteIcon.vue";
 import {NodeToolbar} from "@vue-flow/node-toolbar";
 import RunIcon from "@/components/ruleEngine/icons/RunIcon.vue";
 import CopyIcon from "@/components/ruleEngine/icons/CopyIcon.vue";
+import { useVueFlow } from '@vue-flow/core'
 
-const deleteNode = (id) => {
-  console.log(id)
+const props=defineProps<{
+  id: string
+}>();
+
+const { getNodes,findNode, setNodes,removeNodes } = useVueFlow()
+
+const runNode = (id) => {
+
+}
+
+const deleteNode = () => {
+  removeNodes(props.id)
+}
+
+const copyNode = () => {
+  const node = findNode(props.id)
+  console.log(node)
+  if (node) {
+    const newNode = {
+      ...node,
+      id: `copy-${node.id}`,
+      position: {
+        x: node.position.x + 20,
+        y: node.position.y + 20
+      }
+    }
+    setNodes([...getNodes, newNode])
+  }
 }
 </script>
