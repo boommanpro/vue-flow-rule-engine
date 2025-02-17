@@ -10,6 +10,7 @@ import App from './App.vue'
 import useStore  from '@/components/ruleEngine/store'
 import { createPinia } from 'pinia'
 
+import './main.css'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 

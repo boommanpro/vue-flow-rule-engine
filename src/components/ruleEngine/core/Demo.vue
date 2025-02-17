@@ -51,6 +51,9 @@ const addParam = () => {
           <h3>{{ node.id }}</h3>
         </div>
       </div>
+      <div>
+        <button class="btn btn-primary">点击我</button>
+      </div>
     </div>
   </div>
 </template>

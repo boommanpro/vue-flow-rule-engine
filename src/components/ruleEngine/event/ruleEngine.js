@@ -6,7 +6,7 @@ export default function setupRuleEngine() {
     const {onNodeClick, onNodeDragStop, onConnect, addEdges} = useVueFlow();
 
     onNodeClick(({event, node}) => {
-
+        console.log('nodeClick', {event, node});
     });
 
     onNodeDragStop(({event, nodes, node}) => {
