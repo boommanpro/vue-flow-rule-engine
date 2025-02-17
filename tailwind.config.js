@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
     content: [
         "./index.html",
@@ -7,7 +8,7 @@ module.exports = {
     theme: {
         extend: {},
     },
-    plugins: [require("daisyui")],
+    plugins: [require('daisyui')],
     // daisyUI 配置（可选）
     daisyui: {
         themes: true, // 启用所有主题

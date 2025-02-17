@@ -1,6 +1,6 @@
 /* import the required styles */
 import "@vue-flow/core/dist/style.css";
-
+import './main.css'
 /* import the default theme (optional) */
 import "@vue-flow/core/dist/theme-default.css";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -10,7 +10,7 @@ import App from './App.vue'
 import useStore  from '@/components/ruleEngine/store'
 import { createPinia } from 'pinia'
 
-import './main.css'
+
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
@@ -25,6 +25,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 autoRegisterNode().then((nodeTypes) => {
     store.nodeTypes = nodeTypes;
     app.mount('#app')
+
 }).catch((error) => {
     console.error('Failed to register nodes:', error);
 });
