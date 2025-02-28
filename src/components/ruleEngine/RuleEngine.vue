@@ -16,7 +16,7 @@
       <dropzone-background/>
     </vue-flow>
 
-    <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal"/>
+<!--    <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal"/>-->
 
   </div>
 </template>
@@ -96,4 +96,5 @@ const selectedNode = ref(null);
   gap: 10px; /* 按钮之间的间距 */
   z-index: 100; /* 确保按钮在最上层 */
 }
+
 </style>

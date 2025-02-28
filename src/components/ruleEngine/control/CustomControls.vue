@@ -1,19 +1,47 @@
 <!-- src/CustomControls.vue -->
 <template>
-  <Controls position="top-right">
-    <ControlButton title="Reset Transform" @click="resetTransform">
-      <CustomIcon name="reset"/>
-    </ControlButton>
-    <ControlButton title="Shuffle Node Positions" @click="updatePos">
-      <CustomIcon name="update"/>
-    </ControlButton>
-    <ControlButton title="Log `toObject`" @click="logToObject">
-      <CustomIcon name="log"/>
-    </ControlButton>
-    <ControlButton title="Toggle MiniMap" @click="toggleMiniMap">
-      <CustomIcon name="minimap"/>
-    </ControlButton>
-  </Controls>
+  <div>
+    <Panel position="bottom-center" style="background: white">
+      <button class="btn btn-outline btn-sm" >
+        <CustomIcon class="btn-ms" name="touch"/>
+        <CustomIcon name="down-row"/>
+      </button>
+      <div class="dropdown dropdown-top dropdown-end">
+        <div tabindex="0" role="button" class="btn m-1">100%</div>
+        <div
+            tabindex="0"
+            class="dropdown-content card card-compact bg-primary text-primary-content z-[1] w-64 p-2 shadow">
+          <ul  class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            <li><a>缩小</a></li>
+            <li><a>放大</a></li>
+            <li><a>自适应</a></li>
+          </ul>
+          <ul  class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            <li><a>缩小</a></li>
+            <li><a>放大</a></li>
+            <li><a>自适应</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <ControlButton title="Shuffle Node Positions" @click="updatePos">
+        <CustomIcon name="touch"/>
+      </ControlButton>
+      <ControlButton title="Shuffle Node Positions" @click="updatePos">
+        <CustomIcon name="update"/>
+      </ControlButton>
+      <ControlButton title="Log `toObject`" @click="logToObject">
+        <CustomIcon name="log"/>
+      </ControlButton>
+      <ControlButton title="Toggle MiniMap" @click="toggleMiniMap">
+        <CustomIcon name="minimap"/>
+      </ControlButton>
+      <ControlButton title="Reset Transform" @click="resetTransform">
+        <CustomIcon name="reset"/>
+      </ControlButton>
+
+    </Panel>
+  </div>
   <mini-map v-if="miniMapShow" pannable zoomable/>
 </template>
 
@@ -22,7 +50,8 @@ import {ControlButton, Controls} from "@vue-flow/controls";
 import CustomIcon from "@/components/ruleEngine/icons/CustomIcon.vue";
 import {MiniMap} from "@vue-flow/minimap";
 import {ref} from "vue";
-import {useVueFlow} from "@vue-flow/core";
+import { Panel, VueFlow, useVueFlow } from '@vue-flow/core'
+
 
 const nodes=defineModel('nodes')
 const emit = defineEmits(['resetTransform', 'updatePos', 'logToObject']);
@@ -61,4 +90,22 @@ function resetTransform() {
 const toggleMiniMap = () => {
   miniMapShow.value = !miniMapShow.value;
 };
+
+const { updateNode } = useVueFlow()
+
+const bgColor = ref('#eeeeee')
+
+const label = ref('Node 1')
+
+
+
+const edges = ref([{ id: 'e1-2', source: '1', target: '2' }])
+
+function handleUpdate() {
+}
 </script>
+<style scoped>
+.vue-flow__controls-button{
+  display: inline;
+}
+</style>
