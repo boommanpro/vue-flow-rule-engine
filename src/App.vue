@@ -6,8 +6,7 @@ import RuleEngine from "@/components/ruleEngine/RuleEngine.vue";
 <template>
 
   <div style="width: 100%;height: 100%">
-
-    <rule-engine/>
+    <router-view></router-view>
   </div>
 </template>
 

@@ -1,45 +1,56 @@
 <!-- src/CustomControls.vue -->
 <template>
   <div>
-    <Panel position="bottom-center" style="background: white">
-      <button class="btn btn-outline btn-sm">
-        <CustomIcon name="touch" />
-        <CustomIcon name="down-row" />
-      </button>
-      <div class="dropdown dropdown-top dropdown-end">
-        <div tabindex="0" role="button" class="btn m-1">100%</div>
-        <div tabindex="0"
-          class="dropdown-content card card-compact bg-primary text-primary-content z-[1] w-64 p-2 shadow">
-          <ul class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-            <li><a>缩小</a></li>
-            <li><a>放大</a></li>
-            <li><a>自适应</a></li>
-          </ul>
-          <ul class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-            <li><a>缩小</a></li>
-            <li><a>放大</a></li>
-            <li><a>自适应</a></li>
-          </ul>
+    <Panel position="bottom-center">
+
+      <div class="container">
+        <div class="left-panel tools-panel">
+          <!-- 左侧面板内容 -->
+          <InteractiveMode/>
+          <div class="dropdown dropdown-top dropdown-end">
+            <div tabindex="0" role="button" class="btn m-1">100%</div>
+            <div tabindex="0"
+              class="dropdown-content card card-compact bg-primary text-primary-content z-[1] w-64 p-2 shadow">
+              <ul class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <li><a>缩小</a></li>
+                <li><a>放大</a></li>
+                <li><a>自适应</a></li>
+              </ul>
+              <ul class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <li><a>缩小</a></li>
+                <li><a>放大</a></li>
+                <li><a>自适应</a></li>
+              </ul>
+            </div>
+          </div>
+          <ControlButton title="Shuffle Node Positions" @click="updatePos">
+            <CustomIcon name="touch" />
+          </ControlButton>
+          <ControlButton title="Shuffle Node Positions" @click="updatePos">
+            <CustomIcon name="update" />
+          </ControlButton>
+          <ControlButton title="Log `toObject`" @click="logToObject">
+            <CustomIcon name="log" />
+          </ControlButton>
+          <ControlButton title="Toggle MiniMap" @click="toggleMiniMap">
+            <CustomIcon name="minimap" />
+          </ControlButton>
+          <ControlButton title="Reset Transform" @click="resetTransform">
+            <CustomIcon name="reset" />
+          </ControlButton>
         </div>
 
+        <div class="right-panel tools-panel">
+          <!-- 右侧面板内容 -->
+          <button class="btn">
+            <CustomIcon name="touch" />
+            试运行
+          </button>
+        </div>
       </div>
-      <ControlButton title="Shuffle Node Positions" @click="updatePos">
-        <CustomIcon name="touch" />
-      </ControlButton>
-      <ControlButton title="Shuffle Node Positions" @click="updatePos">
-        <CustomIcon name="update" />
-      </ControlButton>
-      <ControlButton title="Log `toObject`" @click="logToObject">
-        <CustomIcon name="log" />
-      </ControlButton>
-      <ControlButton title="Toggle MiniMap" @click="toggleMiniMap">
-        <CustomIcon name="minimap" />
-      </ControlButton>
-      <ControlButton title="Reset Transform" @click="resetTransform">
-        <CustomIcon name="reset" />
-      </ControlButton>
-
+      <mini-map v-if="miniMapShow" />
     </Panel>
+
   </div>
   <mini-map v-if="miniMapShow" pannable zoomable />
 </template>
@@ -50,6 +61,7 @@ import CustomIcon from "@/components/ruleEngine/icons/CustomIcon.vue";
 import { MiniMap } from "@vue-flow/minimap";
 import { ref } from "vue";
 import { Panel, VueFlow, useVueFlow } from '@vue-flow/core'
+import InteractiveMode from "./InteractiveMode.vue";
 
 
 const nodes = defineModel('nodes')
@@ -104,7 +116,29 @@ function handleUpdate() {
 }
 </script>
 <style scoped>
-.vue-flow__controls-button {
-  display: inline;
+.container {
+  display: flex;
+  gap: 20px;
+  /* 左右面板之间的间距 */
+}
+
+.tools-panel {
+  background-color: var(--coz-bg-max);
+  border: 1px solid var(--coz-stroke-plus);
+  border-radius: 10px;
+  box-shadow: var(--coz-shadow-small);
+  padding: 0 4px;
+  pointer-events: auto;
+}
+
+.left-panel {
+  background-color: #ffffff;
+  width: 300px;
+  /* 设置左侧面板的宽度 */
+}
+
+.right-panel {
+  width: 300px;
+  /* 设置右侧面板的宽度 */
 }
 </style>
