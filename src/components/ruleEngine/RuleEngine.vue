@@ -16,7 +16,7 @@
       <dropzone-background/>
     </vue-flow>
 
-<!--    <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal"/>-->
+   <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal"/>
 
   </div>
 </template>
@@ -58,6 +58,7 @@ const selectedNode = ref(null);
 .vue-flow {
   height: 100vh;
   position: relative; /* 确保子组件可以正确定位 */
+  background-color: #f2f4f7;
 }
 
 .basic-flow {
