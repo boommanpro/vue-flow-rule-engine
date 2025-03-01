@@ -1,7 +1,9 @@
 <template>
   <div class="relative">
     <!-- 按钮A -->
-    <button @click="toggleDropdown" class="btn btn-primary">按钮A</button>
+
+    
+    <button @click="toggleDropdown" class="btn"><CustomIcon name="touch" /></button>
 
     <!-- 悬浮的div -->
     <div v-if="isDropdownOpen"
@@ -32,6 +34,7 @@
 <script setup>
 import { ref } from 'vue';
 import CustomIcon from '../icons/CustomIcon.vue';
+import SvgIcon from '../icons/SvgIcon.vue';
 
 const isDropdownOpen = ref(false);
 

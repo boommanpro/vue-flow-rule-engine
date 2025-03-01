@@ -4,25 +4,10 @@
     <Panel position="bottom-center">
 
       <div class="container">
-        <div class="left-panel tools-panel">
+        <div class="left-panel tools-panel flex">
           <!-- 左侧面板内容 -->
           <InteractiveMode/>
-          <div class="dropdown dropdown-top dropdown-end">
-            <div tabindex="0" role="button" class="btn m-1">100%</div>
-            <div tabindex="0"
-              class="dropdown-content card card-compact bg-primary text-primary-content z-[1] w-64 p-2 shadow">
-              <ul class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><a>缩小</a></li>
-                <li><a>放大</a></li>
-                <li><a>自适应</a></li>
-              </ul>
-              <ul class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><a>缩小</a></li>
-                <li><a>放大</a></li>
-                <li><a>自适应</a></li>
-              </ul>
-            </div>
-          </div>
+          <Sizing/>
           <ControlButton title="Shuffle Node Positions" @click="updatePos">
             <CustomIcon name="touch" />
           </ControlButton>
@@ -62,6 +47,7 @@ import { MiniMap } from "@vue-flow/minimap";
 import { ref } from "vue";
 import { Panel, VueFlow, useVueFlow } from '@vue-flow/core'
 import InteractiveMode from "./InteractiveMode.vue";
+import Sizing from "./Sizing.vue";
 
 
 const nodes = defineModel('nodes')

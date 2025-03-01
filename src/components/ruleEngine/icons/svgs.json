@@ -1,0 +1,7 @@
+{
+    "touch": {
+      "content": "<path d=\"M12 2L2 22h20L12 2z\"/>",
+      "defaultSize": "24px",
+      "defaultColor": "currentColor"
+    }
+  }
