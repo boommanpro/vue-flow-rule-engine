@@ -8,21 +8,8 @@
           <!-- 左侧面板内容 -->
           <InteractiveMode/>
           <Sizing/>
-          <ControlButton title="Shuffle Node Positions" @click="updatePos">
-            <CustomIcon name="touch" />
-          </ControlButton>
-          <ControlButton title="Shuffle Node Positions" @click="updatePos">
-            <CustomIcon name="update" />
-          </ControlButton>
-          <ControlButton title="Log `toObject`" @click="logToObject">
-            <CustomIcon name="log" />
-          </ControlButton>
-          <ControlButton title="Toggle MiniMap" @click="toggleMiniMap">
-            <CustomIcon name="minimap" />
-          </ControlButton>
-          <ControlButton title="Reset Transform" @click="resetTransform">
-            <CustomIcon name="reset" />
-          </ControlButton>
+          <Thumbnail/>
+          <AddNodes/>
         </div>
 
         <div class="right-panel tools-panel">
@@ -33,11 +20,10 @@
           </button>
         </div>
       </div>
-      <mini-map v-if="miniMapShow" />
+ 
     </Panel>
 
   </div>
-  <mini-map v-if="miniMapShow" pannable zoomable />
 </template>
 
 <script setup>
@@ -48,6 +34,8 @@ import { ref } from "vue";
 import { Panel, VueFlow, useVueFlow } from '@vue-flow/core'
 import InteractiveMode from "./InteractiveMode.vue";
 import Sizing from "./Sizing.vue";
+import Thumbnail from "./Thumbnail.vue";
+import AddNodes from "./AddNodes.vue";
 
 
 const nodes = defineModel('nodes')

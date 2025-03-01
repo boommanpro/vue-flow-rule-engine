@@ -3,8 +3,7 @@
     <!-- 按钮A -->
 
     
-    <button @click="toggleDropdown" class="btn"><CustomIcon name="touch" /></button>
-
+     <button @click="toggleDropdown" class="btn   font-bold py-2 px-4 rounded focus:outline-none"><CustomIcon name="touch-min" /><CustomIcon name="down-row" /></button>
     <!-- 悬浮的div -->
     <div v-if="isDropdownOpen"
          class="interactive-mode absolute bottom-full left-0 bg-base-100 p-4 shadow-lg rounded-box z-10 mb-2">

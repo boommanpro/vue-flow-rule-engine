@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import InteractiveMode from '../ruleEngine/control/InteractiveMode.vue';
 import Sizing from '../ruleEngine/control/Sizing.vue';
+import Thumbnail from '../ruleEngine/control/Thumbnail.vue';
 import OverviewCard from './base/OverviewCard.vue';
 
 </script>
@@ -29,5 +30,15 @@ import OverviewCard from './base/OverviewCard.vue';
         </template>
     </OverviewCard>
 
+    <OverviewCard>
+        <template #title>
+            缩略图
+        </template>
+        <template #content>
+            <div style="height: 400px;">
+            </div>
+            <Thumbnail/>
+        </template>
+    </OverviewCard>
 
 </template>
