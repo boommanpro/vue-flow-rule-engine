@@ -1,28 +1,25 @@
-<!-- src/CustomControls.vue -->
 <template>
-  <div>
+  <div class="controls-container">
     <Panel position="bottom-center">
-
       <div class="container">
         <div class="left-panel tools-panel flex">
           <!-- 左侧面板内容 -->
-          <InteractiveMode/>
-          <Sizing/>
-          <Thumbnail/>
-          <AddNodes/>
+          <InteractiveMode />
+          <Sizing />
+          <Thumbnail />
+          <AddNodes />
         </div>
 
         <div class="right-panel tools-panel">
           <!-- 右侧面板内容 -->
-          <button class="btn">
-            <CustomIcon name="touch" />
+           <Setting/>
+          <button class="btn m-1 btn-sm rounded-lg  bg-green-700 text-white  hover:bg-green-800" @click="handleRun">
+            <CustomIcon name="run" />
             试运行
           </button>
         </div>
       </div>
- 
     </Panel>
-
   </div>
 </template>
 
@@ -36,6 +33,7 @@ import InteractiveMode from "./InteractiveMode.vue";
 import Sizing from "./Sizing.vue";
 import Thumbnail from "./Thumbnail.vue";
 import AddNodes from "./AddNodes.vue";
+import Setting from "./Setting.vue";
 
 
 const nodes = defineModel('nodes')
@@ -90,6 +88,12 @@ function handleUpdate() {
 }
 </script>
 <style scoped>
+.controls-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   display: flex;
   gap: 20px;
@@ -109,10 +113,18 @@ function handleUpdate() {
   background-color: #ffffff;
   width: 300px;
   /* 设置左侧面板的宽度 */
+  display: flex;
+  align-items: center;
 }
 
 .right-panel {
-  width: 300px;
   /* 设置右侧面板的宽度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 130px;
 }
+
+
 </style>
