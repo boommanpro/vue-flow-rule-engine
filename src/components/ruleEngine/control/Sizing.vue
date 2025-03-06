@@ -1,7 +1,8 @@
 <template>
     <div class="relative">
-      <button @click="toggleMenu" :class="['bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded', { 'bg-base-100': value === '100%' }]">
+      <button class="btn btn-sm m-1 rounded-lg" @click="toggleMenu" >
         {{ value }}%
+        <CustomIcon name="down-row"/>
       </button>
       <div v-if="showMenu" class="absolute bottom-full left-0 bg-base-100 p-4 shadow-lg rounded-box z-10 mb-2">
         <ul class="text-sm text-gray-800">
@@ -20,6 +21,7 @@
   
   <script setup>
   import { ref, watch } from 'vue';
+import CustomIcon from '../icons/CustomIcon.vue';
   
   const props = defineProps({
     modelValue: {

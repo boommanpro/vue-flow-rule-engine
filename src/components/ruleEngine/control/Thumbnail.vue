@@ -2,7 +2,7 @@
 
 <template>
     <div class="relative">
-      <button @click="toggleMenu" :class="[' font-bold btn py-2 px-4 rounded', { 'bg-base-100': value === '100%' }]">
+      <button @click="toggleMenu" class="btn btn-ghost btn-sm m-1 rounded-lg">
         <CustomIcon name="thumbnail-min"/>
       </button>
       <div v-if="showMenu" class="absolute bottom-full z-10 mb-2">
