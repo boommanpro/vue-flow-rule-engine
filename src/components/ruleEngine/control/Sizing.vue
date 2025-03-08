@@ -6,8 +6,8 @@
 </button>
       <div v-if="showMenu" class="absolute bottom-full left-0 bg-base-100 p-4 shadow-lg rounded-box z-10 mb-2">
         <ul class="text-sm text-gray-800">
-          <li @click="handleClick('-10')">缩小</li>
-          <li @click="handleClick('+10')">放大</li>
+          <li @click="handleClick('-20')">缩小</li>
+          <li @click="handleClick('+20')">放大</li>
           <li @click="handleClick('75')">自适应</li>
           <div class="divider my-2"></div>
           <li @click="handleClick('50')">缩放到 50%</li>
@@ -49,11 +49,11 @@ import CustomIcon from '../icons/CustomIcon.vue';
     let newValue = value.value;
   
     switch (option) {
-      case '-10':
-        newValue = Math.max(0, parseInt(newValue) - 10);
+      case '-20':
+        newValue = Math.max(0, parseInt(newValue) - 20);
         break;
-      case '+10':
-        newValue = Math.min(200, parseInt(newValue) + 10);
+      case '+20':
+        newValue = Math.min(200, parseInt(newValue) + 20);
         break;
       default:
         newValue = option;

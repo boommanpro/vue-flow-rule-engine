@@ -10,7 +10,10 @@
         :min-zoom="0.2"
         :max-zoom="4"
         :node-types="store.nodeTypes"
-        @dragover="onDragOver" @dragleave="onDragLeave">
+        @dragover="onDragOver" @dragleave="onDragLeave"
+        :zoom-on-scroll="store.isMouseMode"
+        :zoom-on-pinch="!store.isMouseMode"
+        >
 
       <custom-controls v-model:nodes="store.nodes"/>
       <dropzone-background/>
