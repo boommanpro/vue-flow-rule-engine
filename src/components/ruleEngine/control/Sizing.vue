@@ -1,9 +1,9 @@
 <template>
-    <div class="relative">
-      <button class="btn btn-sm m-1 rounded-lg" @click="toggleMenu" >
-        {{ value }}%
-        <CustomIcon name="down-row"/>
-      </button>
+    <div class="relative flex items-center">
+ <button class="h-6 btn btn-sm m-1 rounded-lg bg-transparent hover:bg-transparent border border-gray-300 text-gray-700" @click="toggleMenu">
+  {{ value }}%
+  <CustomIcon name="down-row" />
+</button>
       <div v-if="showMenu" class="absolute bottom-full left-0 bg-base-100 p-4 shadow-lg rounded-box z-10 mb-2">
         <ul class="text-sm text-gray-800">
           <li @click="handleClick('-10')">缩小</li>

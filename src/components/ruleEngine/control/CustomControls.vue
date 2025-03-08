@@ -1,25 +1,37 @@
 <template>
-  <div class="controls-container">
-    <Panel position="bottom-center">
-      <div class="container">
-        <div class="left-panel tools-panel flex">
-          <!-- 左侧面板内容 -->
-          <InteractiveMode />
-          <Sizing />
-          <Thumbnail />
-          <AddNodes />
+  <div class="parent-container vue-flow__panel w-screen h-screen m-0">
+    <div class="main-container h-full w-full relative">
+      <!-- tools-container -->
+      <div class="tools-container  flex-none w-[75%] absolute bottom-0" :class="{ 'w-full': !showNodesEditor }">
+        <div class="tools-bar flex justify-center mb-10">
+          <div class="left-tools-bar flex  items-center bg-white rounded-lg pl-0.5 pr-0.5 mr-4 ">
+            <InteractiveMode />
+            <Sizing />
+            <AddNotes />
+            <OptimizedLayout />
+            <Thumbnail />
+            <div class="vertical-divider"></div>
+            <button @click="toggleNodesEditor" class="btn m-1 pl-4 btn-sm rounded-lg bg-indigo-400  text-white ">
+              <CustomIcon name="add" />
+              添加节点
+            </button>
+          </div>
+          <div class="right-tools-bar items-center bg-white rounded-lg pl-0.5 pr-0.5">
+            <Setting />
+            <button class="btn m-1 pl-4 btn-sm rounded-lg  bg-green-700 text-white  hover:bg-green-800"
+              @click="toggleDebugContainer">
+              <CustomIcon name="run" />
+              试运行
+            </button>
+          </div>
         </div>
-
-        <div class="right-panel tools-panel">
-          <!-- 右侧面板内容 -->
-           <Setting/>
-          <button class="btn m-1 btn-sm rounded-lg  bg-green-700 text-white  hover:bg-green-800" @click="handleRun">
-            <CustomIcon name="run" />
-            试运行
-          </button>
-        </div>
+        <!-- debug-container -->
+        <div v-if="showDebugContainer" class="debug-container bg-green-200 h-[150px] w-full"></div>
       </div>
-    </Panel>
+
+      <!-- nodes-editor-container -->
+      <div v-if="showNodesEditor" class="nodes-editor-container bg-red-200 h-full w-[25%] absolute right-0 top-0"></div>
+    </div>
   </div>
 </template>
 
@@ -34,6 +46,8 @@ import Sizing from "./Sizing.vue";
 import Thumbnail from "./Thumbnail.vue";
 import AddNodes from "./AddNodes.vue";
 import Setting from "./Setting.vue";
+import OptimizedLayout from "./OptimizedLayout.vue";
+import AddNotes from "./AddNotes.vue";
 
 
 const nodes = defineModel('nodes')
@@ -81,6 +95,16 @@ const bgColor = ref('#eeeeee')
 const label = ref('Node 1')
 
 
+const showNodesEditor = ref(true);
+const showDebugContainer = ref(true); // 默认展示 debug-container
+
+const toggleNodesEditor = () => {
+  showNodesEditor.value = !showNodesEditor.value;
+};
+
+const toggleDebugContainer = () => {
+  showDebugContainer.value = !showDebugContainer.value;
+};
 
 const edges = ref([{ id: 'e1-2', source: '1', target: '2' }])
 
@@ -88,43 +112,10 @@ function handleUpdate() {
 }
 </script>
 <style scoped>
-.controls-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.vertical-divider {
+  width: 1px;
+  height: 16px; /* 根据需要调整高度 */
+  background-color: #ccc; /* 分隔线的颜色 */
+  margin: 0 8px; /* 调整与两侧元素的距离 */
 }
-
-.container {
-  display: flex;
-  gap: 20px;
-  /* 左右面板之间的间距 */
-}
-
-.tools-panel {
-  background-color: var(--coz-bg-max);
-  border: 1px solid var(--coz-stroke-plus);
-  border-radius: 10px;
-  box-shadow: var(--coz-shadow-small);
-  padding: 0 4px;
-  pointer-events: auto;
-}
-
-.left-panel {
-  background-color: #ffffff;
-  width: 300px;
-  /* 设置左侧面板的宽度 */
-  display: flex;
-  align-items: center;
-}
-
-.right-panel {
-  /* 设置右侧面板的宽度 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff;
-  width: 130px;
-}
-
-
 </style>

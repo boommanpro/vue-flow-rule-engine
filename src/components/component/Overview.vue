@@ -3,11 +3,13 @@ import InteractiveMode from '../ruleEngine/control/InteractiveMode.vue';
 import Sizing from '../ruleEngine/control/Sizing.vue';
 import Thumbnail from '../ruleEngine/control/Thumbnail.vue';
 import OverviewCard from './base/OverviewCard.vue';
+import ControlDemo from './demo/ControlDemo.vue';
 
 </script>
 
 <template>
-    <OverviewCard>
+    <ControlDemo/>
+    <!-- <OverviewCard>
         <template #title>
             交互模式按钮
         </template>
@@ -39,6 +41,6 @@ import OverviewCard from './base/OverviewCard.vue';
             </div>
             <Thumbnail/>
         </template>
-    </OverviewCard>
+    </OverviewCard> -->
 
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div class="tooltip custom-tooltip" data-tip="调试">
-        <button class="btn-square m-1 btn btn-ghost btn-sm rounded-lg hover:bg-base-300">
+        <button class="btn-ghost h-6 p-1 rounded-lg btn   font-bold   focus:outline-none">
             <CustomIcon name="setting" class="w-8 h-8" />
         </button>
     </div>
