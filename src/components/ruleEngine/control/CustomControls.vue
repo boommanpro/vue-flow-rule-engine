@@ -7,7 +7,7 @@
       </div>
 
       <!-- tools-container -->
-      <div class="tools-container flex-none w-[75%] absolute bottom-0" :class="{ 'w-full': !showNodesEditor }" style="z-index: 10;">
+      <div class="tools-container fixed flex-none w-[75%]  bottom-0" :class="{ 'w-full': !showNodesEditor }" style="z-index: 10;">
         <div class="tools-bar flex justify-center mb-10" style="z-index: 10;">
           <div class="left-tools-bar flex items-center bg-white rounded-lg pl-0.5 pr-0.5 mr-4">
             <InteractiveMode />
@@ -35,7 +35,7 @@
       </div>
 
       <!-- nodes-editor-container -->
-      <div v-if="showNodesEditor" class="nodes-editor-container bg-red-200 h-full w-[25%] absolute right-0 top-0" style="z-index: 10;"></div>
+      <div v-if="showNodesEditor" class="nodes-editor-container fixed bg-red-200 h-full w-[25%]  right-0 top-0" style="z-index: 10;"></div>
     </div>
   </div>
 </template>

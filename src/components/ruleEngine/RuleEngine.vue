@@ -1,33 +1,23 @@
 <!-- src/RuleEngine.vue -->
 <template>
-  <div class="vue-flow" @drop="onDrop">
+  <div class="vue-flow" style="width: 10000px;height: 10000px; overflow: auto; " @drop="onDrop">
 
-    <vue-flow
-        v-model:nodes="store.nodes"
-        v-model:edges="store.edges"
-        class="basic-flow"
-        :default-viewport="{ zoom: 1}"
-        :min-zoom="0.2"
-        :max-zoom="4"
-        :node-types="store.nodeTypes"
-        @dragover="onDragOver" @dragleave="onDragLeave"
-        :zoom-on-scroll="store.isMouseMode"
-        :zoom-on-pinch="!store.isMouseMode"
-        >
+    <vue-flow v-model:nodes="store.nodes" v-model:edges="store.edges" class="basic-flow" :default-viewport="{ zoom: 1 }"
+      :min-zoom="0.2" :max-zoom="4" :node-types="store.nodeTypes" @dragover="onDragOver" @dragleave="onDragLeave"
+      :zoom-on-scroll="store.isMouseMode" :zoom-on-pinch="!store.isMouseMode">
 
-      <custom-controls v-model:nodes="store.nodes"/>
-      <dropzone-background/>
+      <dropzone-background />
     </vue-flow>
 
-   <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal"/>
-
+    <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal" />
+    <custom-controls v-model:nodes="store.nodes" />
   </div>
 </template>
 
 <script setup>
 import useStore from './store';
-import {onMounted, ref} from 'vue';
-import {VueFlow} from "@vue-flow/core";
+import { onMounted, ref } from 'vue';
+import { VueFlow } from "@vue-flow/core";
 import '@vue-flow/controls/dist/style.css';
 import '@/components/ruleEngine/global-vue-flow.css';
 import CustomControls from "@/components/ruleEngine/control/CustomControls.vue";
@@ -38,7 +28,7 @@ import setupRuleEngine from './event/ruleEngine.js'
 import DropzoneBackground from "@/components/ruleEngine/background/DropzoneBackground.vue";
 
 
-const {onDragOver, onDrop, onDragLeave, isDragOver} = useDragAndDrop()
+const { onDragOver, onDrop, onDragLeave, isDragOver } = useDragAndDrop()
 setupRuleEngine();
 const store = useStore();
 // 初始化节点和边
@@ -60,7 +50,8 @@ const selectedNode = ref(null);
 <style>
 .vue-flow {
   height: 100vh;
-  position: relative; /* 确保子组件可以正确定位 */
+  position: relative;
+  /* 确保子组件可以正确定位 */
   background-color: #f2f4f7;
 }
 
@@ -72,7 +63,8 @@ const selectedNode = ref(null);
 
 
 .vue-flow aside {
-  z-index: 100; /* 确保按钮在最上层 */
+  z-index: 100;
+  /* 确保按钮在最上层 */
   position: absolute;
   top: 0;
   left: 0;
@@ -94,11 +86,14 @@ const selectedNode = ref(null);
 
 .custom-controls {
   position: absolute;
-  top: 10px; /* 距离顶部的距离 */
-  right: 10px; /* 距离右侧的距离 */
+  top: 10px;
+  /* 距离顶部的距离 */
+  right: 10px;
+  /* 距离右侧的距离 */
   display: flex;
-  gap: 10px; /* 按钮之间的间距 */
-  z-index: 100; /* 确保按钮在最上层 */
+  gap: 10px;
+  /* 按钮之间的间距 */
+  z-index: 100;
+  /* 确保按钮在最上层 */
 }
-
 </style>
