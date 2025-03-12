@@ -1,6 +1,6 @@
 <template>
   <div class="tools-container  absolute flex-none w-[75%]  bottom-0 p-2"  :class="{ 'w-full': !showNodesEditor }"
-    style="z-index: 10; width: calc(75%);">
+    style="z-index: 10;">
     <div class="tools-bar flex justify-center mb-10" style="z-index: 10;">
       <div class="left-tools-bar flex items-center bg-white rounded-lg pl-0.5 pr-0.5 mr-4">
         <InteractiveMode />
