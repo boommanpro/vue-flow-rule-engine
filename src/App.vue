@@ -12,16 +12,19 @@ import { ref, onMounted } from 'vue';
 
 <template>
 
-  <div>
+  <div class="h-screen">
 
     <!-- <router-view></router-view> -->
 
-
-    <div class=" bg-blue-400" style="width: 1000px;height: 100px;">
-
+    <div class="w-full h-[20%] bg-red-300">
+      <p class="text-center">Div 1 (20%)</p>
     </div>
-    <rule-engine />
-    <div class=" bg-amber-200" style="width: 1000px;height: 100px;"></div>
+      <div class="w-full h-[60%] bg-blue-300 overflow-auto">
+        <rule-engine />
+    </div>
+    <div class="w-full h-[20%] bg-green-300">
+      <p class="text-center">Div 3 (20%)</p>
+    </div>
   </div>
 </template>
 

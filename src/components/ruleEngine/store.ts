@@ -12,7 +12,7 @@ const useStore = defineStore('vue-flow-pinia', () => {
         },
     ]);
 
-    const isMouseMode = ref(true);
+    const isMouseMode = ref(false);
 
     const edges = ref<Edge[]>();
 

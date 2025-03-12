@@ -1,8 +1,8 @@
 <!-- src/RuleEngine.vue -->
 <template>
-  <div class="relative" style="width: 800px; height: 800px;">
+  <div class="relative ruleEngineWraper w-full h-full">
 
-    <div ref="ruleEngineContainer" style="width: 800px; height: 800px; overflow: auto;">
+    <div ref="ruleEngineContainer" class=" w-full h-full" style="overflow: auto;">
 
       <div class="vue-flow" style="width: 10000px;height: 10000px; overflow: auto; " @drop="onDrop">
 

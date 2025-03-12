@@ -1,6 +1,6 @@
 <template>
-  <div class="tools-container  absolute flex-none w-[75%]  bottom-0" :class="{ 'w-full': !showNodesEditor }"
-    style="z-index: 10;">
+  <div class="tools-container  absolute flex-none w-[75%]  bottom-0 p-2"  :class="{ 'w-full': !showNodesEditor }"
+    style="z-index: 10; width: calc(75%);">
     <div class="tools-bar flex justify-center mb-10" style="z-index: 10;">
       <div class="left-tools-bar flex items-center bg-white rounded-lg pl-0.5 pr-0.5 mr-4">
         <InteractiveMode />
@@ -24,12 +24,12 @@
       </div>
     </div>
     <!-- debug-container -->
-    <div v-if="showDebugContainer" class="debug-container bg-green-200 h-[150px] w-full" style="z-index: 10;"></div>
+    <div v-if="showDebugContainer" class="debug-container bg-green-200 h-[150px] w-full " style="z-index: 10;"></div>
   </div>
 
   <!-- nodes-editor-container -->
-  <div v-if="showNodesEditor" class="nodes-editor-container absolute  bg-red-200 h-full w-[25%]  right-0 top-0"
-    style="z-index: 10;"></div>
+  <div v-if="showNodesEditor" class="nodes-editor-container absolute  bg-red-200 h-full w-[25%] right-2 top-0" 
+    style="z-index: 10;width: calc(25% - 0.5rem);"></div>
 </template>
 
 <script setup>
