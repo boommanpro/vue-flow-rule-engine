@@ -21,6 +21,11 @@
           <CustomIcon name="run" />
           试运行
         </button>
+        <button class="btn m-1 pl-4 btn-sm rounded-lg bg-green-700 text-white hover:bg-green-800"
+          @click="consoleLog">
+          <CustomIcon name="run" />
+          控制台打印
+        </button>
       </div>
     </div>
     <!-- debug-container -->
@@ -28,7 +33,7 @@
   </div>
 
   <!-- nodes-editor-container -->
-  <div v-if="showNodesEditor" class="nodes-editor-container absolute  bg-red-200 h-full w-[25%] right-2 top-0" 
+  <div v-if="showNodesEditor" class="nodes-editor-container absolute  bg-red-200 h-[90%] w-[25%] right-2  bottom-2" 
     style="z-index: 10;width: calc(25% - 0.5rem);"></div>
 </template>
 
@@ -45,7 +50,8 @@ import AddNodes from "./AddNodes.vue";
 import Setting from "./Setting.vue";
 import OptimizedLayout from "./OptimizedLayout.vue";
 import AddNotes from "./AddNotes.vue";
-
+import useStore from '@/components/ruleEngine/store.ts';
+const store = useStore();
 
 const nodes = defineModel('nodes')
 const emit = defineEmits(['resetTransform', 'updatePos', 'logToObject']);
@@ -101,6 +107,11 @@ const toggleNodesEditor = () => {
 
 const toggleDebugContainer = () => {
   showDebugContainer.value = !showDebugContainer.value;
+};
+
+
+const consoleLog = () => {
+  console.log(store.data)
 };
 
 const edges = ref([{ id: 'e1-2', source: '1', target: '2' }])

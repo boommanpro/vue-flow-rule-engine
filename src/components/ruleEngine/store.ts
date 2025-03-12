@@ -14,12 +14,16 @@ const useStore = defineStore('vue-flow-pinia', () => {
 
     const isMouseMode = ref(false);
 
-    const edges = ref<Edge[]>();
+    const edges = ref<Edge[]>([]);
 
     const reset = () => {
         edges.value = [];
         nodes.value = [];
     };
+    const data = ref({
+        nodes: nodes.value,
+        edges: edges.value,
+    });
 
     const log = () => {
         console.log('nodes', nodes.value, 'edges', edges.value);
@@ -46,11 +50,12 @@ const useStore = defineStore('vue-flow-pinia', () => {
         });
     };
     // 切换模式的方法
-    const changeMouse = (vale:boolean) => {
+    const changeMouse = (vale: boolean) => {
         isMouseMode.value = vale
     };
 
     return {
+        data,
         nodes,
         edges,
         reset,

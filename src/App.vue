@@ -19,7 +19,7 @@ import { ref, onMounted } from 'vue';
     <div class="w-full h-[20%] bg-red-300">
       <p class="text-center">Div 1 (20%)</p>
     </div>
-      <div class="w-full h-[60%] bg-blue-300 overflow-auto">
+      <div class=" h-[60%] w-[80%] bg-blue-300 overflow-auto">
         <rule-engine />
     </div>
     <div class="w-full h-[20%] bg-green-300">

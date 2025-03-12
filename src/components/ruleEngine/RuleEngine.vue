@@ -4,10 +4,10 @@
 
     <div ref="ruleEngineContainer" class=" w-full h-full" style="overflow: auto;">
 
-      <div class="vue-flow" style="width: 10000px;height: 10000px; overflow: auto; " @drop="onDrop">
+      <div class="vue-flow" style="width: 4000px;height: 4000px; overflow: auto; " @drop="onDrop">
 
         <vue-flow v-model:nodes="store.nodes" v-model:edges="store.edges" class="basic-flow"
-          :default-viewport="{ zoom: 1 }" :min-zoom="0.2" :max-zoom="4" :node-types="store.nodeTypes"
+          :default-viewport="{ zoom: 0.8 }" :min-zoom="0.2" :max-zoom="4" :node-types="store.nodeTypes"
           @dragover="onDragOver" @dragleave="onDragLeave" :zoom-on-scroll="store.isMouseMode"
           :zoom-on-pinch="!store.isMouseMode">
 
