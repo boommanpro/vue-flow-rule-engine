@@ -1,17 +1,25 @@
 <!-- src/RuleEngine.vue -->
 <template>
-  <div class="vue-flow" style="width: 10000px;height: 10000px; overflow: auto; " @drop="onDrop">
+  <div class="relative" style="width: 800px; height: 800px;">
 
-    <vue-flow v-model:nodes="store.nodes" v-model:edges="store.edges" class="basic-flow" :default-viewport="{ zoom: 1 }"
-      :min-zoom="0.2" :max-zoom="4" :node-types="store.nodeTypes" @dragover="onDragOver" @dragleave="onDragLeave"
-      :zoom-on-scroll="store.isMouseMode" :zoom-on-pinch="!store.isMouseMode">
+    <div ref="ruleEngineContainer" style="width: 800px; height: 800px; overflow: auto;">
 
-      <dropzone-background />
-    </vue-flow>
+      <div class="vue-flow" style="width: 10000px;height: 10000px; overflow: auto; " @drop="onDrop">
 
+        <vue-flow v-model:nodes="store.nodes" v-model:edges="store.edges" class="basic-flow"
+          :default-viewport="{ zoom: 1 }" :min-zoom="0.2" :max-zoom="4" :node-types="store.nodeTypes"
+          @dragover="onDragOver" @dragleave="onDragLeave" :zoom-on-scroll="store.isMouseMode"
+          :zoom-on-pinch="!store.isMouseMode">
+
+          <dropzone-background />
+        </vue-flow>
+
+      </div>
+    </div>
     <sidebar v-model:node="selectedNode" v-model:modal-visible="showModal" />
     <custom-controls v-model:nodes="store.nodes" />
   </div>
+
 </template>
 
 <script setup>
@@ -41,8 +49,23 @@ onMounted(async () => {
 
 });
 
+const ruleEngineContainer = ref(null);
 
+onMounted(() => {
+  const container = ruleEngineContainer.value;
+  if (container) {
+    // 计算中间位置
+    const scrollLeft = container.scrollWidth / 2 - container.clientWidth / 2;
+    const scrollTop = container.scrollHeight / 2 - container.clientHeight / 2;
 
+    // 滚动到中间位置
+    container.scrollTo({
+      left: scrollLeft,
+      top: scrollTop,
+      behavior: 'auto', // 可选：平滑滚动
+    });
+  }
+});
 
 const selectedNode = ref(null);
 </script>

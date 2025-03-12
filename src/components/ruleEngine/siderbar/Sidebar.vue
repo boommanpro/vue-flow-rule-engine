@@ -16,7 +16,7 @@ const activeNames = ref(['inputNodes'])
 </script>
 
 <template>
-  <div class="fixed top-0 bottom-0 left-0 z-1">
+  <div class="siderbar bg-white absolute top-0 bottom-0 left-0 z-1">
     <aside>
       <el-collapse v-model="activeNames">
         <el-input :prefix-icon="Search" v-model="searchQuery" placeholder="搜索组件" type="text" class="search-input" />
