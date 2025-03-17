@@ -6,6 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import vueJsx from '@vitejs/plugin-vue-jsx';
 // https://vite.dev/config/
 export default defineConfig({
+  base: './', // 设置基础路径为 './' 表示相对路径
   plugins: [
     vue(),
     vueDevTools(),
